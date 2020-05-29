@@ -1,0 +1,14 @@
+{
+    "name": "justauthme/prestashop-module",
+    "type": "library",
+    "require": {
+        "justauthme/php-sdk": "^1.0"
+    },
+    "license": "All rights reserved",
+    "authors": [
+        {
+            "name": "JustAuthMe",
+            "email": "hello@justauth.me"
+        }
+    ]
+}

@@ -1,0 +1,55 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3aa3dfe6833ac16d895bd1d48f22e929",
+    "packages": [
+        {
+            "name": "justauthme/php-sdk",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JustAuthMe/PHP-SDK.git",
+                "reference": "3b5bb8b3886052e1a53ff1e88bf22b0838cd9b14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JustAuthMe/PHP-SDK/zipball/3b5bb8b3886052e1a53ff1e88bf22b0838cd9b14",
+                "reference": "3b5bb8b3886052e1a53ff1e88bf22b0838cd9b14",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JustAuthMe\\SDK\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "mit"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Cauty",
+                    "email": "peter@justauth.me",
+                    "homepage": "https://justauth.me"
+                }
+            ],
+            "description": "Official PHP SDK for the JustAuthMe platform",
+            "time": "2020-05-06T22:12:55+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
