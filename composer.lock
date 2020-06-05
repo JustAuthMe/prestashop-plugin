@@ -4,23 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3aa3dfe6833ac16d895bd1d48f22e929",
+    "content-hash": "32c81e3d9720aab01396a1aa52f00514",
     "packages": [
         {
             "name": "justauthme/php-sdk",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JustAuthMe/PHP-SDK.git",
-                "reference": "3b5bb8b3886052e1a53ff1e88bf22b0838cd9b14"
+                "reference": "3aacd42fde46c549c4116652c97561c160004fd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JustAuthMe/PHP-SDK/zipball/3b5bb8b3886052e1a53ff1e88bf22b0838cd9b14",
-                "reference": "3b5bb8b3886052e1a53ff1e88bf22b0838cd9b14",
+                "url": "https://api.github.com/repos/JustAuthMe/PHP-SDK/zipball/3aacd42fde46c549c4116652c97561c160004fd7",
+                "reference": "3aacd42fde46c549c4116652c97561c160004fd7",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": ">=7.1.0"
             },
             "type": "library",
@@ -41,7 +42,7 @@
                 }
             ],
             "description": "Official PHP SDK for the JustAuthMe platform",
-            "time": "2020-05-06T22:12:55+00:00"
+            "time": "2020-06-02T10:37:17+00:00"
         }
     ],
     "packages-dev": [],
@@ -50,6 +51,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.1"
+    },
     "platform-dev": []
 }

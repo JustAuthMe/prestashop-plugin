@@ -6,14 +6,17 @@ if (!defined('_PS_VERSION_')) {
 
 class JustAuthMe extends Module
 {
-    const DB_PREFIX = 'jam_';
+    const DB_PREFIX = _DB_PREFIX_ . 'jam_';
     const USER_TABLE = self::DB_PREFIX . 'user';
     const CONFIG_APP_ID = 'JUSTAUTHME_APPID';
     const CONFIG_API_SECRET = 'JUSTAUTHME_SECRET';
     const CONFIG_CALLBACK_URL = 'JUSTAUTHME_CALLBACK';
 
+    private $slug;
+
     public function __construct()
     {
+        $this->slug = 'justauthme';
         $this->name = 'JustAuthMe';
         $this->version = '1.0.0';
         $this->tab = 'front_office_features';
@@ -49,21 +52,15 @@ class JustAuthMe extends Module
                     ) ENGINE=' . _MYSQL_ENGINE_ . ' DEFAULT CHARSET=utf8 ;
                 ');
 
-                    $return &= Db::getInstance()->execute('
+                $return &= Db::getInstance()->execute('
                     ALTER TABLE `' . self::USER_TABLE . '`
                       ADD PRIMARY KEY (`id`),
                       ADD KEY `user_id` (`user_id`);
                 ');
 
-                    $return &= Db::getInstance()->execute('
+                $return &= Db::getInstance()->execute('
                     ALTER TABLE `' . self::USER_TABLE . '`
                       MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
-                ');
-
-                    $return &= Db::getInstance()->execute('
-                    ALTER TABLE `' . self::USER_TABLE . '`
-                      ADD CONSTRAINT `jam_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `ps_customer` (`id_customer`) ON DELETE CASCADE ON UPDATE CASCADE;
-                    COMMIT;
                 ');
             }
         }
@@ -89,14 +86,14 @@ class JustAuthMe extends Module
         if (Tools::isSubmit('submit' . $this->name)) {
             $app_id = strval(Tools::getValue(self::CONFIG_APP_ID));
             $secret = strval(Tools::getValue(self::CONFIG_API_SECRET));
-            //$callback = strval(Tools::getValue(self::CONFIG_CALLBACK_URL));
+            $callback = strval(Tools::getValue(self::CONFIG_CALLBACK_URL));
 
-            if (empty($app_id) || empty($secret) /*|| empty($callback)*/) {
+            if (empty($app_id) || empty($secret) || empty($callback)) {
                 $output .= $this->displayError('App ID, API secret and callback URL are required.');
             } else {
                 Configuration::updateValue(self::CONFIG_APP_ID, $app_id);
                 Configuration::updateValue(self::CONFIG_API_SECRET, $secret);
-                //Configuration::updateValue(self::CONFIG_CALLBACK_URL, $callback);
+                Configuration::updateValue(self::CONFIG_CALLBACK_URL, $callback);
                 $output .= $this->displayConfirmation('JustAuthMe successfully set up.');
             }
         }
@@ -126,14 +123,14 @@ class JustAuthMe extends Module
                     'name' => self::CONFIG_API_SECRET,
                     'size' => 20,
                     'required' => true
-                ]/*,
+                ],
                 [
                     'type' => 'text',
                     'label' => $this->l('Callback URL'),
                     'name' => self::CONFIG_CALLBACK_URL,
                     'size' => 20,
                     'required' => true
-                ]*/
+                ]
             ],
             'submit' => [
                 'title' => $this->l('Save'),
@@ -173,7 +170,7 @@ class JustAuthMe extends Module
         // Load current value
         $helper->fields_value[self::CONFIG_APP_ID] = Tools::getValue(self::CONFIG_APP_ID, Configuration::get(self::CONFIG_APP_ID));
         $helper->fields_value[self::CONFIG_API_SECRET] = Tools::getValue(self::CONFIG_API_SECRET, Configuration::get(self::CONFIG_API_SECRET));
-        //$helper->fields_value[self::CONFIG_CALLBACK_URL] = Tools::getValue(self::CONFIG_CALLBACK_URL, Configuration::get(self::CONFIG_CALLBACK_URL));
+        $helper->fields_value[self::CONFIG_CALLBACK_URL] = Tools::getValue(self::CONFIG_CALLBACK_URL, Configuration::get(self::CONFIG_CALLBACK_URL));
 
         return $helper->generateForm($fieldsForm);
     }
@@ -182,7 +179,7 @@ class JustAuthMe extends Module
     {
         $this->context->smarty->assign([
             'app_id' => Configuration::get(self::CONFIG_APP_ID),
-            'callback_url' => Configuration::get(self::CONFIG_CALLBACK_URL)
+            'callback_url' => $this->context->link->getModuleLink($this->slug, 'login') //Configuration::get(self::CONFIG_CALLBACK_URL)
         ]);
 
         return $this->display(__FILE__, 'button.tpl');

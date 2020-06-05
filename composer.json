@@ -1,8 +1,19 @@
 {
     "name": "justauthme/prestashop-module",
-    "type": "library",
+    "description": "JustAuthMe official Prestashop module",
+    "type": "prestashop-module",
     "require": {
-        "justauthme/php-sdk": "^1.0"
+        "php": ">=7.1",
+        "justauthme/php-sdk": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "JustAuthMe\\JustAuthMe\\": "src/"
+        },
+        "classmap": [
+            "justauthme.php"
+        ],
+        "exclude-from-classmap": []
     },
     "license": "All rights reserved",
     "authors": [
